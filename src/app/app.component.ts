@@ -11,6 +11,7 @@ import { NgForm } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
   public students!: Student[];
+  public editStudent!: Student | null;
 
   constructor(private studentService: StudentService){}
 
@@ -35,12 +36,28 @@ export class AppComponent implements OnInit {
       next: (response: Student) => {
         console.log(response);
         this.getStudents();
+        addForm.reset();
+      },
+      error: (error: HttpErrorResponse) => {
+        alert(error.message);
+        addForm.reset();
+      }
+    }
+    );
+  }
+
+  public onUpdateStudent(student: Student): void {
+    document.getElementById('add-student-form')?.click();
+    this.studentService.updateStudent(student).subscribe({
+      next: (response: Student) => {
+        console.log(response);
+        this.getStudents();
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
       }
     }
-    )
+    );
   }
 
   public onOpenModal(student: Student | null, mode: string): void {
@@ -53,6 +70,7 @@ export class AppComponent implements OnInit {
       button.setAttribute('data-target', '#addStudentModal');
     }
     if (mode === 'edit') {
+      this.editStudent = student;
       button.setAttribute('data-target', '#editStudentModal');
     }
     if (mode === 'delete') {
