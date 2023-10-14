@@ -75,6 +75,19 @@ export class AppComponent implements OnInit {
     );
   }
 
+  public searchStudents(key: string): void {
+    const results: Student[] = [];
+    for (const student of this.students) {
+      if (student.name.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+        results.push(student);
+      }
+      this.students = results;
+      if (!key) {
+        this.getStudents();
+      }
+    }
+  }
+
   public onOpenModal(student: Student, mode: string): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
