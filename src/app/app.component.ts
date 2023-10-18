@@ -181,11 +181,11 @@ export class AppComponent implements OnInit {
     }
     if (mode === 'edit') {
       this.editCourse = course;
-      button.setAttribute('data-target', '#editStudentModal');
+      button.setAttribute('data-target', '#editCourseModal');
     }
     if (mode === 'delete') {
       this.deleteCourse = course;
-      button.setAttribute('data-target', '#deleteStudentModal');
+      button.setAttribute('data-target', '#deleteCourseModal');
     }
     container!.appendChild(button);
     button.click();
