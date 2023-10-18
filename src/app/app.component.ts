@@ -110,7 +110,7 @@ export class AppComponent implements OnInit {
     this.courseService.addCourse(addCForm.value).subscribe({
       next: (response: Course) => {
         console.log(response);
-        //this.getCourses();
+        this.getCourses();
         addCForm.reset();
       },
       error: (error: HttpErrorResponse) => {
