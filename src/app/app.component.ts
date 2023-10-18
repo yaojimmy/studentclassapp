@@ -94,6 +94,18 @@ export class AppComponent implements OnInit {
     }
   }
 
+  public findStudent(studentId: number): Student {
+    this.studentService.getStudentById(studentId).subscribe(
+      (response: Student) => {
+        return response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+    return null;
+  }
+
   public getCourses(): void {
     this.courseService.getCourses().subscribe(
       (response: Course[]) => {
@@ -103,6 +115,10 @@ export class AppComponent implements OnInit {
         alert(error.message);
       }
     )
+  }
+
+  public findCourse(courseId: number): Course {
+    return this.courses.find(course => course.id === courseId);
   }
 
   public onAddCourse(addCForm: NgForm): void {

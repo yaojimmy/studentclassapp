@@ -39,10 +39,8 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Email : <a href="#">{{student?.email}}</a></li>
                     <li class="list-group-item"><i class="fa fa-phone float-right"></i>Phone : {{student?.phone}}</li>
-                    <li class="list-group-item" *ngFor="let course of student.courses"><i class="fa fa-times float-right"></i>
-                     <p>Course: {{ course.name }}</p>
-                     <p>Grade: {{ course.grades.get(student) }}</p>
-                     <p>Professor: {{ course.professor }}</p>
+                    <li class="list-group-item" *ngFor="let courseId of student.courses"><i class="fa fa-times float-right"></i>
+                     <p>Course: {{ findCourse(courseId).name }}</p>
                  </li>
                 </ul>
                 <div class="card-body">
