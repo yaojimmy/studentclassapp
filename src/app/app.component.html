@@ -39,7 +39,7 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Email : <a href="#">{{student?.email}}</a></li>
                     <li class="list-group-item"><i class="fa fa-phone float-right"></i>Phone : {{student?.phone}}</li>
-                    <li class="list-group-item" *ngFor="let courseId of student.courses"><i class="fa fa-times float-right"></i>
+                    <li class="list-group-item" *ngFor="let courseId of student.courseIds"><i class="fa fa-times float-right"></i>
                      <p>Course: {{ findCourse(courseId).name }}</p>
                  </li>
                 </ul>

@@ -95,15 +95,7 @@ export class AppComponent implements OnInit {
   }
 
   public findStudent(studentId: number): Student {
-    this.studentService.getStudentById(studentId).subscribe(
-      (response: Student) => {
-        return response;
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
-    return null;
+    return this.students.find(student => student.id === studentId);
   }
 
   public getCourses(): void {

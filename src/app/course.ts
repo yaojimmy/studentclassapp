@@ -3,6 +3,6 @@ export interface Course {
     name: string;
     professor: string;
     courseCode: string;
-    students: Set<number>;
-    grades: Map<number, number>;
+    studentIds: Set<number>;
+    studentGrades: Map<number, number>;
 }

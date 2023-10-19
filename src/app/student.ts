@@ -4,5 +4,5 @@ export interface Student {
     email: string;
     phone: string;
     studentCode: string;
-    courses: Set<number>;
+    courseIds: Set<number>;
 }
