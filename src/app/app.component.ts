@@ -98,6 +98,18 @@ export class AppComponent implements OnInit {
     return this.students.find(student => student.id === studentId);
   }
 
+  public deleteStudentCourse(student: Student, courseId: number) {
+    const courseIndex = student.courseIds.findIndex(c => c === courseId);
+    if (courseIndex !== -1) {
+      student.courseIds.splice(courseIndex, 1);
+    }
+  }
+
+  public addStudentCourse(student: Student, courseId: string) {
+    const courseIdConverted = parseInt(courseId, 10);
+    student.courseIds.push(courseIdConverted);
+  }
+
   public getCourses(): void {
     this.courseService.getCourses().subscribe(
       (response: Course[]) => {

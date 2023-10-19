@@ -40,7 +40,7 @@
                     <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Email : <a href="#">{{student?.email}}</a></li>
                     <li class="list-group-item"><i class="fa fa-phone float-right"></i>Phone : {{student?.phone}}</li>
                     <li class="list-group-item" *ngFor="let courseId of student.courseIds"><i class="fa fa-times float-right"></i>
-                     <p>Course: {{ findCourse(courseId).name }}</p>
+                     <p>{{ findCourse(courseId).name }}, Prof: {{ findCourse(courseId).professor }}, Grade: {{ student?.courseGrades[courseId] }}</p>
                  </li>
                 </ul>
                 <div class="card-body">
@@ -136,11 +136,35 @@
               </div>
               <div class="form-group">
                  <label for="phone">Phone</label>
-                 <input type="text" ngModel="{{editStudent?.phone}}" name="phone" class="form-control" id="phone" name="phone" placeholder="Phone">
+                 <input type="text" ngModel="{{editStudent?.phone}}" name="phone" class="form-control" id="phone" placeholder="Phone">
               </div>
+
+              <!-- Courses section -->
+              <div class="form-group">
+               <label for="courses">Courses</label>
+
+               <!-- Display courses the student is taking -->
+               <ul>
+               <li *ngFor="let courseId of editStudent?.courseIds">
+                  {{ findCourse(courseId).name }}, Prof: {{ findCourse(courseId).professor }}, Grade: {{ editStudent?.courseGrades[courseId] }}
+                  <!-- Add a delete button/icon for each course -->
+                  <button (click)="deleteStudentCourse(editStudent, courseId)" class="btn btn-sm btn-danger">Delete</button>
+               </li>
+               </ul>
+
+               <!-- Select menu for adding a course --> 
+               <select ngModel #selectedCourse name="selectedCourse" class="form-control" id="selectedCourse">
+               <option value="">Select a course</option>
+               <option *ngFor="let course of courses" [value]="course.id">{{ course.name }}</option>
+               </select>
+
+               Add course button 
+               <button (click)="addStudentCourse(editStudent, selectedCourse.value)" class="btn btn-primary mt-2">Add Course</button>
+            </div>
+
               <div class="modal-footer">
                  <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
-                 <button (click)="onUpdateStudent(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+                 <button (click)="onUpdateStudent(editStudent)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
               </div>
            </form>
         </div>

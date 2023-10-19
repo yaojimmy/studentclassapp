@@ -4,5 +4,6 @@ export interface Student {
     email: string;
     phone: string;
     studentCode: string;
-    courseIds: Set<number>;
+    courseIds: Array<number>;
+    courseGrades: Map<number, number>;
 }
