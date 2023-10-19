@@ -14,14 +14,14 @@
       </li>
      </ul>
      <form class="form-inline my-2 my-lg-0">
-        <!-- This searches as you type instead
+        <!-- This searches as you type instead -->
           <input type="search" (ngModelChange)="searchStudents(key.value)" #key="ngModel" ngModel
-         name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search students..." required> -->
-         <input type="search" #key="ngModel" ngModel
+         name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search students..." required>
+         <!-- <input type="search" #key="ngModel" ngModel
          name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search students..." required>
          <button (click)="searchStudents(key.value)" class="search-button">
             submit
-         </button>
+         </button>-->
      </form>
   </div>
 </nav>
@@ -146,7 +146,9 @@
                <!-- Display courses the student is taking -->
                <ul>
                <li *ngFor="let courseId of editStudent?.courseIds">
-                  {{ findCourse(courseId).name }}, Prof: {{ findCourse(courseId).professor }}, Grade: {{ editStudent?.courseGrades[courseId] }}
+                  {{ findCourse(courseId).name }}, Prof: {{ findCourse(courseId).professor }}, 
+                  Grade: <input [(ngModel)]="editStudent.courseGrades[courseId]" name="courseGrade" class="grade-input" type="text">
+
                   <!-- Add a delete button/icon for each course -->
                   <button (click)="deleteStudentCourse(editStudent, courseId)" class="btn btn-sm btn-danger">Delete</button>
                </li>
@@ -155,7 +157,12 @@
                <!-- Select menu for adding a course --> 
                <select ngModel #selectedCourse name="selectedCourse" class="form-control" id="selectedCourse">
                <option value="">Select a course</option>
-               <option *ngFor="let course of courses" [value]="course.id">{{ course.name }}</option>
+               <ng-container *ngFor="let course of courses">
+               <!-- Check if the course ID is not in the student's courseIds -->
+               <ng-container *ngIf="!editStudent?.courseIds.includes(course.id)">
+                  <option [value]="course.id">{{ course.name }}</option>
+               </ng-container>
+            </ng-container>
                </select>
 
                Add course button 
